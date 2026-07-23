@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Submissions</title>
+</head>
+<body>
+    <h1>Community Submissions</h1>
+
+    <p>
+        Anonymous posts from the community.
+        <a href="{% url 'submissions:create_submission' %}">Create Submission</a>
+    </p>
+
+    {% if submissions %}
+        {% for submission in submissions %}
+            <div>
+                <h2>{{ submission.title }}</h2>
+                <p><strong>Category:</strong> {{ submission.category }}</p>
+                <p>{{ submission.description }}</p>
+
+                {% if submission.location %}
+                    <p><strong>Location:</strong> {{ submission.location }}</p>
+                {% endif %}
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>No submissions available.</p>
+    {% endif %}
+</body>
+</html>

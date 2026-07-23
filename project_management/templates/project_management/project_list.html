@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+Projects
+{% endblock %}
+
+{% block content %}
+<h1 class="mt-4">Projects</h1>
+
+<a aria-label="Create a new project" href="{% url 'project_management:create_project' %}" tabindex="0" class="btn btn-success mb-3">Create Project</a>
+
+<div class="row" role="list" aria-label="List of projects">
+    {% if projects %}
+        {% for project in projects %}
+            <div class="col-md-6 col-lg-4 mb-4" role="listitem">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                        <a tabindex="0" href="{% url 'project_management:project_specifics' project.pk %}" aria-label="View details for {{ project.name }}">{{ project.name }}</a>
+                        </h5>
+                        <p class="card-text" aria-label="Description: {{ project.description }}">{{ project.description|default:"No description available" }}</p>
+                        <p class="text-muted mb-1" aria-label="Location: {{ project.location_name }}">{{ project.location_name }}</p>
+                        <p class="text-muted mb-1" aria-label="Manager: {{ project.manager }}">{{ project.manager|default:"No manager" }}</p>
+                        <p class="text-muted" aria-label="Deadline: {{ project.deadline }}">{{ project.deadline|default:"No deadline" }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                No projects have been created yet.
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Anonymous Submission</title>
+</head>
+<body>
+    <h1>Create Anonymous Submission</h1>
+
+    <p>Submit a community report anonymously.</p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div>
+            <label for="id_title">Title</label><br>
+            {{ form.title }}
+        </div>
+
+        <div>
+            <label for="id_category">Category</label><br>
+            {{ form.category }}
+        </div>
+
+        <div>
+            <label for="id_location">Location</label><br>
+            {{ form.location }}
+        </div>
+
+        <div>
+            <label for="id_description">Description</label><br>
+            {{ form.description }}
+        </div>
+
+        <div>
+            <label for="id_photo">Photo (optional)</label><br>
+            {{ form.photo }}
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p>
+        <a href="{% url 'submissions:submission_list' %}">Back to submissions</a>
+    </p>
+</body>
+</html>

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ project.name }} 
+{% endblock %}
+
+{% block content %}
+<h1 class="mt-4 mb-4">{{ project.name }}</h1>
+
+
+
+<!-- Project Details -->
+<div class="card mb-4" role="region" aria-label="Project details for {{ project.name }}">
+    
+    <div class="card-header">
+        <h5>Project Details</h5>
+    </div>
+
+    <div class="card-body">
+        <p><strong>Description:</strong> {{ project.description|default:"No description available" }}</p>
+        <p><strong>Category:</strong> {{ project.get_category_display|default:"No category" }}</p>
+        <p><strong>Location:</strong> {{ project.location_name|default:"No location" }}</p>
+        <p><strong>Latitude:</strong> {{ project.latitude|default:"Not set" }}</p>
+        <p><strong>Longitude:</strong> {{ project.longitude|default:"Not set" }}</p>
+        <p><strong>Deadline:</strong> {{ project.deadline|default:"No deadline" }}</p>
+        <p><strong>Manager:</strong> {{ project.manager|default:"No manager" }}</p>
+        <p><strong>Progress:</strong> {{progress}}%</p> 
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{progress}}%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+<!-- Team Members -->
+{% if is_manager or user.is_superuser %}
+    <div class="card mb-4" role="region" aria-label="Team members">
+        <div class="card-header">
+            <h5>Team Members</h5>
+        </div>
+
+        <div class="card-body">
+
+            {% if team_members %}
+                
+                {% for member in team_members %}
+                        <span class="badge bg-success text dark me-2 p-2" aria-label="Team member: {{ member }}">{{ member }}</span>
+                {% endfor %}
+
+            {% else %}
+                <p class="text-muted">No team members yet.</p>
+            {% endif %}
+
+            <hr>
+            <h6 class="mt-3">Add Team Member</h6>
+            <form method="POST" aria-label="Add team member form">
+            {% csrf_token %}
+                <input type="hidden" name="action" value="add_team_member">
+                <div class="d-flex align-items-center justify-content-between mt-3">
+                    <select multiple="" class="form-select w-25" id="team-members_select" name="team_members">
+                        {% for member in addTeamMember.team_members.field.queryset %}
+                            <option value="{{ member.pk }}">{{ member }}</option>
+                        {% endfor %}
+                    </select> 
+                    <button type="submit" aria-label="Add selected team member" tabindex="0" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+<!-- Tasks -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Tasks</h5>
+    </div>
+    <div class="card-body">
+        {% if tasks %}
+            {% for task in tasks %}
+                <form method="POST" class="d-flex align-items-center gap-2 mb-2">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="complete_task">
+                    <input type="hidden" name="task_id" value="{{ task.pk }}">
+                    <input type="checkbox" tabindex="0" class="form-check-input" name="is_complete" {% if task.is_complete %}checked{% endif %} onchange="this.form.submit()" onkeydown="if(event.key === 'Enter' || event.key === ' ') {this.checked = !this.checked; this.form.submit(); } "style="border: 2px solid #333;">
+                    <span {% if task.is_complete %}style="text-decoration: line-through; color: grey;"{% endif %}>
+                        {{ task.description }}
+                    </span>
+                </form>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted">No tasks yet.</p>
+        {% endif %}
+
+        <hr>
+        <h6 class="mt-3">Add Task</h6>
+        <form method="POST" class="d-flex align-items-center gap-2">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="add_task">
+            <div class="flex-grow-1">
+                <input type="text" aria-label="Type a new task" class="form-control w-25" id="id_description" name="description">
+            </div>
+            <button type="submit" aria-label="Add task to list" tabindex="0" class="btn btn-primary">Add Task</button>
+        </form>
+    </div>
+</div>
+
+{% if is_manager or user.is_superuser %}
+    <a tabindex="0" href="{% url 'project_management:project_list' %}" class="btn btn-secondary">Back to Projects</a>
+{% else %}
+    <a tabindex="0" href="{% url 'users:member' %}" class="btn btn-secondary">Back to Projects</a>
+{% endif %}
+
+{% endblock %}

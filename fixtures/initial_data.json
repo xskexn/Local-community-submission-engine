@@ -1,0 +1,388 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-03-25T11:12:33.570Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "2",
+    "object_repr": "Amelie Griffith",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-03-25T11:14:40.433Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "3",
+    "object_repr": "Olive Yew - Waste Management",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-03-25T11:15:47.063Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "4",
+    "object_repr": "John Smith - Biodiversity",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-03-25T11:16:57.670Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "5",
+    "object_repr": "Zarah Ateer - Road Infrastructure",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-03-25T11:18:06.004Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "6",
+    "object_repr": "Anita Cuda",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-03-25T11:29:07.155Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "Project object (1)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Deadline\"]}}]"
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 1,
+  "fields": {
+    "submission_title": "Streetlight not working",
+    "submission_category": "safety",
+    "submission_location": "Bristol Road, Selly Oak",
+    "submission_description": "The streetlight hasn't been working for a few days, making it very dark at night",
+    "pub_date": "2026-03-25T11:42:40.635Z"
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 2,
+  "fields": {
+    "submission_title": "Broken park bench",
+    "submission_category": "general",
+    "submission_location": "Grove Park, Harborne",
+    "submission_description": "A bench in the park is broken and unsafe to sit on",
+    "pub_date": "2026-03-25T11:43:47.202Z"
+  }
+},
+{
+  "model": "submissions.submission",
+  "pk": 3,
+  "fields": {
+    "submission_title": "Pothole getting worse",
+    "submission_category": "infrastructure",
+    "submission_location": "Hagley Road, Five Ways",
+    "submission_description": "There's a large pothole which is getting bigger and causing problems for cars",
+    "pub_date": "2026-03-25T11:44:53.505Z"
+  }
+},
+{
+  "model": "project_management.project",
+  "pk": 1,
+  "fields": {
+    "name": "Graffiti Removal",
+    "description": "Graffiti has appeared on walls and public spaces",
+    "location_name": "Selly Oak",
+    "latitude": 52.43,
+    "longitude": -1.94,
+    "manager": 2,
+    "deadline": "2026-07-01T11:30:00Z",
+    "category": "other",
+    "team_members": []
+  }
+},
+{
+  "model": "project_management.project",
+  "pk": 2,
+  "fields": {
+    "name": "Park Cleanup",
+    "description": "The local park has litter, overgrown grass, and damaged benches",
+    "location_name": "Grove Park, Harborne",
+    "latitude": 52.45,
+    "longitude": -1.95,
+    "manager": 6,
+    "deadline": "2026-06-15T11:30:00Z",
+    "category": "greenery",
+    "team_members": [
+      3
+    ]
+  }
+},
+{
+  "model": "project_management.project",
+  "pk": 3,
+  "fields": {
+    "name": "Road Repair",
+    "description": "A nearby road has potholes and faded markings, making it unsafe for drivers and cyclists",
+    "location_name": "Five Ways",
+    "latitude": 52.47,
+    "longitude": -1.92,
+    "manager": 2,
+    "deadline": "2026-08-10T12:30:00Z",
+    "category": "road_maintenance",
+    "team_members": [
+      5
+    ]
+  }
+},
+{
+  "model": "project_management.task",
+  "pk": 1,
+  "fields": {
+    "project": 3,
+    "description": "Fill and repair potholes",
+    "is_complete": true
+  }
+},
+{
+  "model": "project_management.task",
+  "pk": 2,
+  "fields": {
+    "project": 3,
+    "description": "Repaint road markings",
+    "is_complete": false
+  }
+},
+{
+  "model": "project_management.task",
+  "pk": 3,
+  "fields": {
+    "project": 2,
+    "description": "Pick up litter",
+    "is_complete": false
+  }
+},
+{
+  "model": "project_management.task",
+  "pk": 4,
+  "fields": {
+    "project": 2,
+    "description": "Empty bins",
+    "is_complete": true
+  }
+},
+{
+  "model": "project_management.task",
+  "pk": 5,
+  "fields": {
+    "project": 2,
+    "description": "Trim overgrown grass",
+    "is_complete": false
+  }
+},
+{
+  "model": "project_management.task",
+  "pk": 6,
+  "fields": {
+    "project": 2,
+    "description": "Check and report broken benches",
+    "is_complete": false
+  }
+},
+{
+  "model": "project_management.task",
+  "pk": 7,
+  "fields": {
+    "project": 1,
+    "description": "Identify affected areas",
+    "is_complete": false
+  }
+},
+{
+  "model": "project_management.task",
+  "pk": 8,
+  "fields": {
+    "project": 1,
+    "description": "Clean or repaint walls",
+    "is_complete": false
+  }
+},
+{
+  "model": "project_management.task",
+  "pk": 9,
+  "fields": {
+    "project": 1,
+    "description": "Apply anti-graffiti coating",
+    "is_complete": false
+  }
+},
+{
+  "model": "users.customuser",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$F60rVqFDYzBnnSKNPZjkUF$Ep7zltUcna9BqHXsTe6fPD6Upt8zF0VxZ3fHXgLDPNI=",
+    "last_login": "2026-03-25T11:46:16.247Z",
+    "is_superuser": true,
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-25T11:01:59.818Z",
+    "username": "admin",
+    "first_name": "ad",
+    "last_name": "min",
+    "email": "admin@gmail.com",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.customuser",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$8f1t4cNpBoUrNp8ebaUGzJ$TrP72S5aqZxOaENlv6yM1sNtvRxSaIGWzvvZKaVMz50=",
+    "last_login": "2026-03-25T11:45:33.900Z",
+    "is_superuser": false,
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-25T11:03:11Z",
+    "username": "manager1",
+    "first_name": "Amelie",
+    "last_name": "Griffith",
+    "email": "amelie@gmail.com",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.customuser",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$pWllsuaXQ72jlFYYlcfyso$pLp7iiPAJeMUNRQpY7O3RAY8KQBeUb4uR78LcN9jxr8=",
+    "last_login": "2026-03-25T11:46:35.333Z",
+    "is_superuser": false,
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-25T11:12:39Z",
+    "username": "member1",
+    "first_name": "Olive",
+    "last_name": "Yew",
+    "email": "olive@gmail.com",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.customuser",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$zZJjqtTSdICp2G0RVgXGvK$G+PYaFOQbcB1h3WVJm1a+Hiw7EZK7u1u0ksqTXDYQxo=",
+    "last_login": "2026-03-25T11:46:48.314Z",
+    "is_superuser": false,
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-25T11:14:43Z",
+    "username": "member2",
+    "first_name": "John",
+    "last_name": "Smith",
+    "email": "john@gmail.com",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.customuser",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$YiDkGccJL29FhZ5IHff6bV$lx4KgJcAHp1ZhphHnUUCNSh6uqmzt0P2rdjGHo9anIQ=",
+    "last_login": "2026-03-25T11:47:05.256Z",
+    "is_superuser": false,
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-25T11:15:55Z",
+    "username": "member3",
+    "first_name": "Zarah",
+    "last_name": "Ateer",
+    "email": "zarah@gmail.com",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.customuser",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$cN4TtOFe2zKuP51M6BLMw1$ULfoMzTbWIKStlkf4OWdehlamf5o/G0wv3bDq8wJXsE=",
+    "last_login": "2026-03-25T11:29:30.284Z",
+    "is_superuser": false,
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-25T11:17:18Z",
+    "username": "manager2",
+    "first_name": "Anita",
+    "last_name": "Cuda",
+    "email": "anita@gmail.com",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.projectmanager",
+  "pk": 2,
+  "fields": {}
+},
+{
+  "model": "users.projectmanager",
+  "pk": 6,
+  "fields": {}
+},
+{
+  "model": "users.projectmember",
+  "pk": 3,
+  "fields": {
+    "organisation": "Independent",
+    "role": "LOCAL_RESIDENT_REP",
+    "specialisation": "WASTE_MANAGEMENT"
+  }
+},
+{
+  "model": "users.projectmember",
+  "pk": 4,
+  "fields": {
+    "organisation": "Independent",
+    "role": "VOLUNTEER",
+    "specialisation": "BIODIVERSITY"
+  }
+},
+{
+  "model": "users.projectmember",
+  "pk": 5,
+  "fields": {
+    "organisation": "Independent",
+    "role": "URBAN_PLANNER",
+    "specialisation": "ROAD_INFRASTRUCTURE"
+  }
+}
+]

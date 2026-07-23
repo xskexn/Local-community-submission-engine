@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Submissions Received
+{% endblock %}
+
+{% block content %}
+    <div class ="container my-5" style = "max-width: 800px;">
+    <div class ="d-flex flex-wrap align-items-center justify-content-between mb-4">
+    <h1 class = "fw mb-0">Submissions</h1>
+    {% if submissions %}
+        <a tabindex="0" aria-label="make a new submission" href = "{% url 'submissions:create_submission' %}" class = "btn btn-primary fw-semibold px-4 py-2">+ New Submission</a>
+    {% endif %}
+    </div>
+
+    {% if submissions %}
+        {% for submission in submissions %}
+            <div class = "card shadow-sm border mb-3 position-relative">
+                <div class = "card-body p-4">
+                    <span class = "badge 
+                        {% if submission.submission_category == 'general' %}bg-warning text-dark
+                        {% elif submission.submission_category == 'safety' %}bg-secondary
+                        {% elif submission.submission_category == 'infrastructure' %}bg-info
+                        {% elif submission.submission_category == 'event' %}bg-success
+                        {% else %}bg-light text-dark{% endif %} mb-2 px-3 py-1 fw-semibold text-uppercase small">
+                        {{ submission.submission_category }}
+                    </span>
+
+                    <h5 class = "card-title fw-bold mb-2 text-dark">{{ submission.submission_title }}</h5>
+                    <p class = "card-text text-secondary mb-3">{{ submission.submission_description }}</p>
+
+                    <div class = "d-flex flex-wrap gap-3 small text-muted text-dark">
+                        {% if submission.submission_location %}
+                            <span>📍 {{ submission.submission_location }}</span>
+                        {% endif %}
+                        <span>🕒 {{ submission.pub_date|date:"d M Y, H:i" }}</span>
+                    </div>
+
+                    {% if is_manager or user.is_superuser %}
+                        <form method="POST" action="{% url 'submissions:delete_submission' submission.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" tabindex="0" aria-label="delete this submission. name of submission {{ submission.submission_title }}" class="btn btn-sm btn-outline-danger" style="position: absolute; top: 20px; right: 10px;" onclick="return confirm('Are you sure you want to delete this submission?')">
+                            🗑 Delete
+                        </button>
+
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+    <div class = "text-center py-5 my-4">
+        <div class = "display-1 text-muted mb-3">📭</div>
+        <h4 class = "fw-semibold mb-2">No submissions yet</h4>
+        <p class = "text-muted mb-4">Be the first to report a community issue.</p>
+        <a tabindex="0" aria-label="create a new submission" href = "{% url 'submissions:create_submission' %}" class = "btn btn-primary px-4 py-2 fw-semibold">Create Submission</a>
+    </div>
+    {% endif %}
+    </div>
+{% endblock %}

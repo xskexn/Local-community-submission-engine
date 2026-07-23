@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Create Anonymous Submission
+{% endblock %}
+
+{% block content %}
+<div class = "container mt-4" style = "max-width: 680px;">
+    <h1 class = "fw-bold mb-1">Report an Issue</h1>
+    <p class = "text-muted mb-4">Submit a community report anonymously.</p>
+
+    {% if submissionSuccessMsg == True %}
+        <div class="alert alert alert-success alert-dismissible fade show" role="alert" tabindex="-1" id="success-alert">
+            <h4 class="alert-heading">Submission Received!</h4>
+            <hr>
+            <p class="mb-0">Thank you for contributing to a cleaner and safer community.</p>
+            <button tabindex="0" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+
+    <div class = "card shadow-sm">
+        <div class = "card-body p-4">
+            <form method = "post" enctype = "multipart/form-data">
+            {% csrf_token %}
+
+            <div class = "row g-3 mb-3">
+                <div class = "col-md-7">
+                    <label for = "id_title" class="form-label fw-semibold text-secondary ">Title</label>
+                    <input type = "text" name="title" id = "id_title" class = "form-control" value="{{ form.title.value|default:'' }}" placeholder = "Title of the submission" required>
+                </div>
+                <div class = "col-md-5">
+                <label for = "id_category" class="form-label fw-semibold text-secondary">Category</label>
+                <select name="category" id = "id_category" class = "form-select" required>
+                    <option value = "" {% if not form.category.value %}selected{% endif %}>Choose…</option>
+                    <option value = "general" {% if form.category.value == "general" %}selected{% endif %}>General</option>
+                    <option value = "safety" {% if form.category.value == "safety" %}selected{% endif %}>Safety</option>
+                    <option value = "infrastructure" {% if form.category.value == "infrastructure" %}selected{% endif %}>Infrastructure</option>
+                    <option value = "event" {% if form.category.value == "event" %}selected{% endif %}>Event</option>
+                </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for = "id_location" class = "form-label fw-semibold text-secondary">Location</label>
+                <input type = "text" name = "location" id = "id_location" class = "form-control" value="{{ form.location.value|default:'' }}" placeholder = "Approximate location" required>
+            </div>
+
+            <div class="mb-3">
+                <label for = "id_description" class = "form-label fw-semibold text-secondary">Description</label>
+                <textarea name = "description" id = "id_description" class = "form-control" rows = "3" placeholder = "Describe the issue…" required>{{ form.description.value|default:'' }}</textarea>
+            </div>
+
+                <button type="submit" tabindex="0" class="btn btn-primary w-100 py-2 fw-semibold">Submit Report</button>
+            </form>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <a tabindex="0" arial-label="go back to submisions list" href="{% url 'submissions:submission_list' %}" class = "text-secondary text-decoration-none small">← Back to submissions list</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById("success-alert")?.focus();
+    </script>
+{% endblock %}

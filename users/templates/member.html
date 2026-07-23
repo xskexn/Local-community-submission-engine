@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Welcome back, {{user.first_name}} </h1>
+
+<h4><small class="text-body-secondary">View your active projects</small></h4>
+<div class="flex-column mb-5">
+    {% if projects %}
+        {% for project in projects %}
+            <div class="w-100 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                        <a tabindex="0" href="{% url 'project_management:project_specifics' project.pk %}">{{ project.name }}</a>
+                        </h5>
+                        <p class="card-text">{{ project.description|default:"No description available" }}</p>
+                        <p class="text-muted mb-1">{{ project.location_name }}</p>
+                        <p class="text-muted mb-1">{{ project.manager|default:"No manager" }}</p>
+                        <p class="text-muted">{{ project.deadline|default:"No deadline" }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                No projects have been created yet.
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}
